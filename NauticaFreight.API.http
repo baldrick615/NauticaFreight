@@ -1,0 +1,54 @@
+
+### GET ALL
+GET {{HostAddress}}/api/Customer/GetCustomers
+Accept: application/json
+
+### GET BY ID
+GET {{HostAddress}}{{CustomerApi}}/GetCustomerById/9
+Accept: application/json
+
+### ADD Customer
+POST {{HostAddress}}{{CustomerApi}}/AddCustomer
+Content-Type: application/json
+
+{
+  "name": "TEST2",
+  "address": "499 Sunset Blvd",
+  "city": "Los Angeles",
+  "state": "CA",
+  "country": "USA",
+  "postCode": "90028",
+  "phone": "3235550456",
+  "email": "harbormaster@pacificwave.net",
+  "creditLimit": 1000000.00,
+  "paymentTerms": "30",
+  "createDate": "2022-07-01T00:00:00",
+  "lastUpdate": "2025-03-04T00:00:00"
+}
+
+### UPDATE Customer
+PUT {{HostAddress}}{{CustomerApi}}/UpdateCustomer/9
+Content-Type: application/json
+
+{
+  "name": "Updated Customer",
+  "address": "499 Sunset Blvd",
+  "city": "San Fransisco",
+  "state": "CA",
+  "country": "USA",
+  "postCode": "91158",
+  "phone": "3235550456",
+  "email": "harbormaster@pacificwave.net",
+  "creditLimit": 1000000.00,
+  "paymentTerms": "net 10",
+  "createDate": "2022-07-01T00:00:00",
+  "lastUpdate": "2025-03-04T00:00:00"
+}
+
+### DELETE Customer
+DELETE {{HostAddress}}{{CustomerApi}}/DeleteCustomer/9
+Content-Type: application/json
+
+###
+
+
