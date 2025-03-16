@@ -1,13 +1,14 @@
 ﻿using NauticaFreight.API.Models.Domain;
 
-namespace NauticaFreight.API.Repositories;
-
-public interface ICustomerRepository
+namespace NauticaFreight.API.Repositories
 {
-    Task<List<Customer>> GetAllCustomers();
-    Task<Customer?> GetCustomerById(int id);
-    Task<Customer> CreateCustomer(Customer customer);
-    Task<Customer> UpdateCustomer(int id, Customer customer);
-    Task<Customer> DeleteCustomer(int id);
-    
+    public interface ICustomerRepository
+    {
+        Task<List<Customer>> GetCustomers();
+        Task<Customer> GetCustomerById(int id);
+        Task<Customer> CreateAsync(Customer customer);
+        Task<Customer?> UpdateAsync(int id, Customer customer);
+        Task<Customer> DeleteCustomer(int id);
+
+    }
 }
