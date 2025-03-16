@@ -6,12 +6,10 @@ public class Customer
 {
     public int CustomerId { get; set; }
     
-    [Required(ErrorMessage = "Name is required")]
     public string Name { get; set; }
     public string Address { get; set; }
     public string City { get; set; }
     
-    [Required(ErrorMessage = "Use INTL for international customers")]
     public string State { get; set; }
     public string Country { get; set; }
     public string PostCode { get; set; }

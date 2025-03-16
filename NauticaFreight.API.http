@@ -1,10 +1,17 @@
+@HostAddress = http://localhost:5141/
+@CustomerApi = api/customer
+
 
 ### GET ALL
-GET {{HostAddress}}/api/Customer/GetCustomers
+GET {{HostAddress}}{{CustomerApi}}/GetCustomers
+Accept: application/json
+
+### GET ALL
+GET {{HostAddress}}{{CustomerApi}}/GetCustomers
 Accept: application/json
 
 ### GET BY ID
-GET {{HostAddress}}{{CustomerApi}}/GetCustomerById/9
+GET {{HostAddress}}{{CustomerApi}}/GetCustomerById/10
 Accept: application/json
 
 ### ADD Customer
@@ -12,8 +19,8 @@ POST {{HostAddress}}{{CustomerApi}}/AddCustomer
 Content-Type: application/json
 
 {
-  "name": "TEST2",
-  "address": "499 Sunset Blvd",
+  "name": "MSC",
+  "address": "2899 Sunset Blvd",
   "city": "Los Angeles",
   "state": "CA",
   "country": "USA",

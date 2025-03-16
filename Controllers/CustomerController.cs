@@ -1,7 +1,10 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using NauticaFreight.API.Data;
 using NauticaFreight.API.Models.Domain;
+using NauticaFreight.API.Models.Dtos;
+using NauticaFreight.API.Repositories;
 
 namespace NauticaFreight.API.Controllers;
 
@@ -10,10 +13,14 @@ namespace NauticaFreight.API.Controllers;
 [Route("api/[controller]")]
 public class CustomerController : ControllerBase
 {
+    private readonly ICustomerRepository _customerRepository;
+    private readonly IMapper _mapper;
     private readonly ApplicationDbContext _context;
 
-    public CustomerController(ApplicationDbContext context)
+    public CustomerController(ICustomerRepository customerRepository, IMapper mapper, ApplicationDbContext context)
     {
+        _customerRepository = customerRepository;
+        _mapper = mapper;
         _context = context;
     }
 
@@ -21,8 +28,9 @@ public class CustomerController : ControllerBase
     [Route("GetCustomers")]
     public async Task <ActionResult<Customer>> GetCustomers()
     {
-        var customers = await _context.Customers.ToListAsync();
-        return Ok(customers);
+        var customers = await _customerRepository.GetAllCustomers();
+        var customersDto = _mapper.Map<List<CustomerDto>>(customers);
+        return Ok(customersDto);
     }
 
     [HttpGet]
@@ -34,7 +42,7 @@ public class CustomerController : ControllerBase
         {
             return NotFound("Customer not found!");
         }
-        return Ok(customer);
+        return Ok(_mapper.Map<CustomerDto>(customer));
     }
     
     [HttpPost]
