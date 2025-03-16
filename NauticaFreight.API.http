@@ -1,10 +1,12 @@
+@HostAddress = http://localhost:5141/
+@CustomerApi = api/Customer
 
-### GET ALL
-GET {{HostAddress}}/api/Customer/GetCustomers
+###
+GET {{HostAddress}}{{CustomerApi}}/GetCustomers
 Accept: application/json
 
 ### GET BY ID
-GET {{HostAddress}}{{CustomerApi}}/GetCustomerById/9
+GET {{HostAddress}}{{CustomerApi}}/GetCustomerById/12
 Accept: application/json
 
 ### ADD Customer
@@ -27,11 +29,11 @@ Content-Type: application/json
 }
 
 ### UPDATE Customer
-PUT {{HostAddress}}{{CustomerApi}}/UpdateCustomer/9
+PUT {{HostAddress}}{{CustomerApi}}/UpdateCustomer/12
 Content-Type: application/json
 
 {
-  "name": "Updated Customer",
+  "name": "Updated Customer II",
   "address": "499 Sunset Blvd",
   "city": "San Fransisco",
   "state": "CA",
@@ -46,7 +48,7 @@ Content-Type: application/json
 }
 
 ### DELETE Customer
-DELETE {{HostAddress}}{{CustomerApi}}/DeleteCustomer/9
+DELETE {{HostAddress}}{{CustomerApi}}/DeleteCustomer/11
 Content-Type: application/json
 
 ###
