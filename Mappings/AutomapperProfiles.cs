@@ -8,9 +8,15 @@ namespace NauticaFreight.API.Mappings
     {
         public AutomapperProfiles()
         {
+            // Customer Mapping
             CreateMap<Customer, CustomerDto>().ReverseMap();
-            CreateMap<AddCustomerDto, Customer>().ReverseMap();
+            CreateMap<Customer, AddCustomerDto>().ReverseMap();
             CreateMap<Customer, UpdateCustomerDto>().ReverseMap();
+
+            // Port Mapping
+            CreateMap<Port, PortDto>().ReverseMap();
+            CreateMap<Port, AddPortDto>().ReverseMap();
+            CreateMap<Port, UpdatePortDto>().ReverseMap();
         }
 
         
