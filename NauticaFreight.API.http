@@ -1,5 +1,7 @@
 @HostAddress = http://localhost:5141/
 @CustomerApi = api/Customer
+@PortsApi = api/Port
+@PortsScheduleApi = api/PortSchedule
 
 ###
 GET {{HostAddress}}{{CustomerApi}}/GetCustomers
@@ -33,7 +35,7 @@ PUT {{HostAddress}}{{CustomerApi}}/UpdateCustomer/12
 Content-Type: application/json
 
 {
-  "name": "Updated Customer II",
+  "name": "Updated Customer III",
   "address": "499 Sunset Blvd",
   "city": "San Fransisco",
   "state": "CA",
@@ -51,6 +53,44 @@ Content-Type: application/json
 DELETE {{HostAddress}}{{CustomerApi}}/DeleteCustomer/11
 Content-Type: application/json
 
-###
+### GET ALL PORTS
+GET {{HostAddress}}{{PortsApi}}/GetPorts
+Accept: application/json
 
+### Get Port By Id
+GET {{HostAddress}}{{PortsApi}}/GetPortById/11
+Accept: application/json
+
+###
+POST {{HostAddress}}{{PortsApi}}/AddPort
+Content-Type: application/json
+
+{
+  "PortName": "Port of Test4",
+  "LocationCity": "San Fransisco",
+  "LocationCountry": "CN",
+  "Capacity": 2000000,
+  "Demmurage": 575.33,
+  "createDate": "2023-02-11"
+}
+
+### UPDATE PORT
+PUT {{HostAddress}}{{PortsApi}}/UpdatePort/11
+Content-Type: application/json
+
+{
+  "portName": "Port of Test3",
+  "locationCity": "San Fransisco",
+  "locationCountry": "CN",
+  "capacity": 2000000,
+  "demurrage": 425.00,
+  "createDate": "2025-01-01T11:00:00",
+  "lastUpdate": "2025-03-18T17:36:05.004582"
+}
+
+### DELETE Port
+DELETE {{HostAddress}}{{PortsApi}}/DeletePort/12
+Content-Type: application/json
+
+  ###
 

@@ -9,12 +9,11 @@ public class ApplicationDbContext : DbContext
     {
     }
 
-
     public DbSet<Customer> Customers { get; set; }
-    
+    public DbSet<Port> Ports { get; set; }
+
     /*
     public DbSet<Invoice> Invoices { get; set; }
-    public DbSet<Port> Ports { get; set; }
     public DbSet<PortSchedule> PortSchedules { get; set; }
     public DbSet<Shipment> Shipments { get; set; }
     */

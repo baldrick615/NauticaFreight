@@ -46,34 +46,38 @@ public class CustomerController : ControllerBase
     
     [HttpPost]
     [Route("AddCustomer")]
-    public async Task<ActionResult<Customer>> AddCustomer(Customer customer)
+    public async Task<ActionResult<Customer>> AddCustomer(AddCustomerDto addCustomerDto)
     {
-        var customerToAdd = await _customerImpl.CreateAsync(customer);
-        
-        return CreatedAtAction("GetCustomerById", new { id = customer.CustomerId }, customerToAdd);
+        var customerDomainModel = _mapper.Map<Customer>(addCustomerDto);
+        customerDomainModel = await _customerImpl.CreateAsync(customerDomainModel);
+        var customerDto = _mapper.Map<CustomerDto>(customerDomainModel);
+
+        return CreatedAtAction(nameof(GetCustomerById), new { id = customerDto.CustomerId }, customerDto);
     }
     
     [HttpPut]
     [Route("UpdateCustomer/{id:int}")]
-    public async Task<ActionResult<Customer>> UpdateCustomer(int id, [FromBody] UpdateCustomerDto updateCustomerDto)
+    public async Task<ActionResult<Customer>> UpdateCustomer([FromRoute] int id, [FromBody] UpdateCustomerDto updateCustomerDto)
     {
-        var customertoUpdate = _mapper.Map<Customer>(updateCustomerDto);
+        var customerToUpdate = _mapper.Map<Customer>(updateCustomerDto);
         
-        if (customertoUpdate == null)
+        if (customerToUpdate == null)
             return NotFound("Customer not found!");
 
-        var updatedCustomer = await _customerImpl.UpdateAsync(id, customertoUpdate);
+        customerToUpdate = await _customerImpl.UpdateAsync(id, customerToUpdate);
 
-
-        return Ok(_mapper.Map<CustomerDto>(updatedCustomer));
+        return Ok(_mapper.Map<CustomerDto>(customerToUpdate));
     }
     
     [HttpDelete]
     [Route("DeleteCustomer/{id:int}")]
-    public async Task<ActionResult<Customer>> DeleteCustomer(int id)
+    public async Task<ActionResult<Customer>> DeleteCustomer([FromRoute] int id)
     {
         var customer = await _customerImpl.DeleteCustomer(id);
-        
-        return Ok();
+
+        if (customer == null)
+            return NotFound("Customer not found!");
+
+        return Ok(_mapper.Map<CustomerDto>(customer));
     }
 }

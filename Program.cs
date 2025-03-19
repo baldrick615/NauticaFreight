@@ -15,12 +15,12 @@ builder.Services.AddEndpointsApiExplorer();
 builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 builder.Services.AddScoped<ICustomerRepository, CustomerImpl>();
+builder.Services.AddScoped<IPortRepository, PortRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
 
-builder.Services.AddScoped<ICustomerRepository, CustomerImpl>();
 
 var app = builder.Build();
 
