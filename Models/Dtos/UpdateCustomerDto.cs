@@ -8,6 +8,7 @@ namespace NauticaFreight.API.Models.Dtos
         public string Name { get; set; }
 
         public string Address { get; set; }
+        [Required(ErrorMessage = "City is required")]
         public string City { get; set; }
 
         [Required(ErrorMessage = "Use INTL for international customers")]

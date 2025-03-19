@@ -4,10 +4,12 @@ namespace NauticaFreight.API.Models.Domain;
 
 public class Customer
 {
+    [Required]
     public int CustomerId { get; set; }
-    
+    [Required]
     public string Name { get; set; }
     public string Address { get; set; }
+    [Required]
     public string City { get; set; }
     
     public string State { get; set; }

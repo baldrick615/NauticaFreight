@@ -8,6 +8,7 @@ public class AddCustomerDto
     public string Name { get; set; }
     
     public string Address { get; set; }
+    [Required]
     public string City { get; set; }
     
     [Required(ErrorMessage = "Use INTL for international customers")]

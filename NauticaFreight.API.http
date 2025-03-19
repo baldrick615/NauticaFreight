@@ -66,12 +66,11 @@ POST {{HostAddress}}{{PortsApi}}/AddPort
 Content-Type: application/json
 
 {
-  "PortName": "Port of Test4",
+  "PortName": "Port of Test5",
   "LocationCity": "San Fransisco",
   "LocationCountry": "CN",
   "Capacity": 2000000,
-  "Demmurage": 575.33,
-  "createDate": "2023-02-11"
+  "demurrage": 575.33
 }
 
 ### UPDATE PORT
