@@ -12,13 +12,11 @@ namespace NauticaFreight.API.Controllers
     [Route("api/[controller]")]
     public class PortController : ControllerBase
     {
-        private readonly ApplicationDbContext _context;
         private readonly IMapper _mapper;
         private readonly IPortRepository _portRepo;
 
-        public PortController(ApplicationDbContext context, IMapper mapper, IPortRepository portRepo)
+        public PortController(IMapper mapper, IPortRepository portRepo)
         {
-            _context = context;
             _mapper = mapper;
             _portRepo = portRepo;
         }

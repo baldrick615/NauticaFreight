@@ -13,13 +13,11 @@ namespace NauticaFreight.API.Controllers;
 [Route("api/[controller]")]
 public class CustomerController : ControllerBase
 {
-    private readonly ApplicationDbContext _context;
     private readonly ICustomerRepository _customerImpl;
     private readonly IMapper _mapper;
 
-    public CustomerController(ApplicationDbContext context, ICustomerRepository customerImpl, IMapper mapper)
+    public CustomerController(ICustomerRepository customerImpl, IMapper mapper)
     {
-        _context = context;
         _customerImpl = customerImpl;
         _mapper = mapper;
     }

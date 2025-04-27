@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NauticaFreight.API.Data;
 
@@ -11,9 +12,11 @@ using NauticaFreight.API.Data;
 namespace NauticaFreight.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250319030134_PortScheduleAddition")]
+    partial class PortScheduleAddition
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -142,35 +145,6 @@ namespace NauticaFreight.API.Migrations
                     b.HasIndex("PortId");
 
                     b.ToTable("PortSchedules");
-                });
-
-            modelBuilder.Entity("NauticaFreight.API.Models.Domain.Vessel", b =>
-                {
-                    b.Property<Guid>("VesselId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("CargoCategory")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarryingCapacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CountryOfOrigin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Operator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VesselName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("VesselId");
-
-                    b.ToTable("Vessels");
                 });
 
             modelBuilder.Entity("NauticaFreight.API.Models.Domain.PortSchedule", b =>

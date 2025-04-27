@@ -256,5 +256,51 @@
         "StatusCode": 200
       }
     ]
+  },
+  {
+    "ContainingType": "NauticaFreight.API.Controllers.VesselsController",
+    "Method": "AddVessel",
+    "RelativePath": "api/Vessels",
+    "HttpMethod": "POST",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [
+      {
+        "Name": "vessel",
+        "Type": "NauticaFreight.API.Models.Domain.Vessel",
+        "IsRequired": true
+      }
+    ],
+    "ReturnTypes": [
+      {
+        "Type": "NauticaFreight.API.Models.Domain.Vessel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
+  },
+  {
+    "ContainingType": "NauticaFreight.API.Controllers.VesselsController",
+    "Method": "GetVessels",
+    "RelativePath": "api/Vessels",
+    "HttpMethod": "GET",
+    "IsController": true,
+    "Order": 0,
+    "Parameters": [],
+    "ReturnTypes": [
+      {
+        "Type": "NauticaFreight.API.Models.Domain.Vessel",
+        "MediaTypes": [
+          "text/plain",
+          "application/json",
+          "text/json"
+        ],
+        "StatusCode": 200
+      }
+    ]
   }
 ]

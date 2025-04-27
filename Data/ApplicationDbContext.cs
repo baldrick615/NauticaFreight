@@ -11,11 +11,21 @@ public class ApplicationDbContext : DbContext
 
     public DbSet<Customer> Customers { get; set; }
     public DbSet<Port> Ports { get; set; }
+    public DbSet<PortSchedule> PortSchedules { get; set; }
+    public DbSet<Vessel> Vessels { get; set; }
 
     /*
     public DbSet<Invoice> Invoices { get; set; }
-    public DbSet<PortSchedule> PortSchedules { get; set; }
+    
     public DbSet<Shipment> Shipments { get; set; }
     */
+
+    protected override void OnModelCreating(ModelBuilder modelBuilder)
+    {
+        base.OnModelCreating(modelBuilder);
+        modelBuilder.Entity<Customer>()
+            .Property(c => c.PaymentTerms)
+            .HasConversion<string>();
+    }
 }
 

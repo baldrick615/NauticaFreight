@@ -24,7 +24,11 @@ public class Customer
     [DataType(DataType.Currency)]
     [Range(0, 5000000, ErrorMessage = "Credit limit must be greater than zero")]
     public decimal CreditLimit { get; set; }
-    public string PaymentTerms { get; set; }
+    // use PaymentTerm enum
+    //[Required]
+    [EnumDataType(typeof(PaymentTerm))]
+    public PaymentTerm PaymentTerms { get; set; }
+
     public DateTime CreateDate { get; set; } = DateTime.Now;
     public DateTime LastUpdate { get; set; } = DateTime.Now;
 }

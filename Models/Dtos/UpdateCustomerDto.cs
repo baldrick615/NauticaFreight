@@ -1,4 +1,5 @@
 ﻿using System.ComponentModel.DataAnnotations;
+using NauticaFreight.API.Models.Domain;
 
 namespace NauticaFreight.API.Models.Dtos
 {
@@ -24,7 +25,7 @@ namespace NauticaFreight.API.Models.Dtos
 
         [Range(0, 5000000, ErrorMessage = "Credit limit must be greater than zero")]
         public decimal CreditLimit { get; set; }
-        public string PaymentTerms { get; set; }
+        public PaymentTerm PaymentTerms { get; set; }
         public DateTime CreateDate { get; set; } = DateTime.Now;
     }
 }

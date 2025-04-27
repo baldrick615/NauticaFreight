@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NauticaFreight.API.Data;
 
@@ -11,9 +12,11 @@ using NauticaFreight.API.Data;
 namespace NauticaFreight.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250319025734_AddPortSchedule")]
+    partial class AddPortSchedule
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -115,73 +118,6 @@ namespace NauticaFreight.API.Migrations
                     b.HasKey("PortId");
 
                     b.ToTable("Ports");
-                });
-
-            modelBuilder.Entity("NauticaFreight.API.Models.Domain.PortSchedule", b =>
-                {
-                    b.Property<int>("ScheduleId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ScheduleId"));
-
-                    b.Property<DateTime>("ArrivalDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("CapacityUtilized")
-                        .HasColumnType("int");
-
-                    b.Property<DateTime>("DepartureDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<int>("PortId")
-                        .HasColumnType("int");
-
-                    b.HasKey("ScheduleId");
-
-                    b.HasIndex("PortId");
-
-                    b.ToTable("PortSchedules");
-                });
-
-            modelBuilder.Entity("NauticaFreight.API.Models.Domain.Vessel", b =>
-                {
-                    b.Property<Guid>("VesselId")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("uniqueidentifier");
-
-                    b.Property<int>("CargoCategory")
-                        .HasColumnType("int");
-
-                    b.Property<int>("CarryingCapacity")
-                        .HasColumnType("int");
-
-                    b.Property<string>("CountryOfOrigin")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Operator")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("VesselName")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("VesselId");
-
-                    b.ToTable("Vessels");
-                });
-
-            modelBuilder.Entity("NauticaFreight.API.Models.Domain.PortSchedule", b =>
-                {
-                    b.HasOne("NauticaFreight.API.Models.Domain.Port", "Port")
-                        .WithMany()
-                        .HasForeignKey("PortId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
-                    b.Navigation("Port");
                 });
 #pragma warning restore 612, 618
         }
