@@ -1,7 +1,11 @@
+using FastEndpoints;
 using Microsoft.EntityFrameworkCore;
+using NauticaFreight.API.Customers;
 using NauticaFreight.API.Data;
 using NauticaFreight.API.Mappings;
-using NauticaFreight.API.Repositories;
+using NauticaFreight.API.Ports;
+using NauticaFreight.API.Trips;
+using NauticaFreight.API.Vessels;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -9,6 +13,7 @@ var builder = WebApplication.CreateBuilder(args);
 // Learn more about configuring OpenAPI at https://aka.ms/aspnet/openapi
 builder.Services.AddOpenApi();
 builder.Services.AddAutoMapper(typeof(AutomapperProfiles).Assembly);
+//builder.Services.AddFastEndpoints();
 
 builder.Services.AddControllers()
     .AddJsonOptions(options =>
@@ -17,11 +22,11 @@ builder.Services.AddControllers()
     });
 
 builder.Services.AddEndpointsApiExplorer();
-builder.Services.AddAutoMapper(typeof(AutoMapperProfiles));
 
 builder.Services.AddScoped<ICustomerRepository, CustomerImpl>();
 builder.Services.AddScoped<IPortRepository, PortRepository>();
 builder.Services.AddScoped<IVesselsRepository, VesselsRepository>();
+builder.Services.AddScoped<ITripRepository, TripRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
@@ -40,6 +45,8 @@ if (app.Environment.IsDevelopment())
 app.UseRouting();
 
 app.MapControllers();
+
+//app.UseFastEndpoints();
 
 ApplyMigration();
 

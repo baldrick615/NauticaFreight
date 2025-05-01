@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
-using NauticaFreight.API.Models.Domain;
-using NauticaFreight.API.Models.Dtos;
+using NauticaFreight.API.Customers;
+using NauticaFreight.API.Ports;
+using NauticaFreight.API.Trips;
+using NauticaFreight.API.Vessels;
 
 namespace NauticaFreight.API.Mappings
 {
@@ -17,8 +19,19 @@ namespace NauticaFreight.API.Mappings
             CreateMap<Port, PortDto>().ReverseMap();
             CreateMap<Port, AddPortDto>().ReverseMap();
             CreateMap<Port, UpdatePortDto>().ReverseMap();
+
+            // Vessel Mapping
+            CreateMap<Vessel, VesselDto>().ReverseMap();
+            CreateMap<Vessel, AddVesselDto>().ReverseMap();
+            CreateMap<Vessel, UpdateVesselDto>().ReverseMap();
+
+            // Trip Mapping
+            CreateMap<Trip, TripDto>().ReverseMap();
+            CreateMap<TripDto, AddTripDto>().ReverseMap();
+            CreateMap<TripDto, UpdateTripDto>().ReverseMap();
+
         }
 
-        
+
     }
 }

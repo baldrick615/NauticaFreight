@@ -3,6 +3,8 @@
 @PortsApi = api/Port
 @VesselsApi = api/Vessels
 @PortsScheduleApi = api/PortSchedule
+@Vesselid = 6234b17e-eb0e-4a3d-b050-08dd85af8d27
+
 
 ###
 GET {{HostAddress}}{{CustomerApi}}/GetCustomers
@@ -98,3 +100,53 @@ Content-Type: application/json
 
 ###
 
+
+GET {{HostAddress}}{{VesselsApi}}/{{Vesselid}}
+Content-Type: application/json
+
+###
+
+POST {{HostAddress}}{{VesselsApi}}/AddVessels
+Content-Type: application/json
+
+{
+  "vesselName": "MV Pacific Voyager",
+  "operator": "Global Trade Lines",
+  "countryOfOrigin": "Japan",
+  "cargoCategory": 0,
+  "carryingCapacity": "70000"
+}
+
+### UPDATE VESSEL
+PUT {{HostAddress}}{{VesselsApi}}/{{Vesselid}}
+Content-Type: application/json
+{
+  "vesselName": "SeaKing",
+  "operator": "Maersk Ltd",
+  "countryOfOrigin": "Denmark",
+  "cargoCategory": 3,
+  "carryingCapacity": "50000"
+}
+
+### DELETE VESSEL
+DELETE {{HostAddress}}{{VesselsApi}}/{{Vesselid}}
+Content-Type: application/json
+
+###
+GET {{HostAddress}}/api/Trips
+Accept: application/json
+
+###
+POST {{HostAddress}}/api/Trips
+Content-Type: application/json
+
+{
+  "vesselId": "6234b17e-eb0e-4a3d-b050-08dd85af8d27",
+  "departurePortId": 1,
+  "arrivalPortId": 5,
+  "departureDate": "2025-03-01T00:00:00",
+  "estArrivalDate": "2025-03-10T00:00:00",
+  "actualArrivalDate": "2025-03-10T00:00:00",
+  "cargoType": "Electronics",
+  "cargoWeight": 10000
+}

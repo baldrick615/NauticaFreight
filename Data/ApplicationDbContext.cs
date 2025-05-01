@@ -1,5 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
-using NauticaFreight.API.Models.Domain;
+using NauticaFreight.API.Customers;
+using NauticaFreight.API.Ports;
+using NauticaFreight.API.Trips;
+using NauticaFreight.API.Vessels;
 
 namespace NauticaFreight.API.Data;
 
@@ -13,6 +16,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<Port> Ports { get; set; }
     public DbSet<PortSchedule> PortSchedules { get; set; }
     public DbSet<Vessel> Vessels { get; set; }
+    public DbSet<Trip> Trips { get; set; }
 
     /*
     public DbSet<Invoice> Invoices { get; set; }
