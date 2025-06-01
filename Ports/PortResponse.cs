@@ -1,22 +1,16 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿namespace NauticaFreight.API.Ports;
 
-namespace NauticaFreight.API.Ports;
-
-public class Port
+public class PortResponse
 {
-    [Required]
     public int PortId { get; set; }
-    [Required]
     public string PortName { get; set; }
-    [Required]
     public string LocationCity { get; set; }
-    [Required]
     public string LocationCountry { get; set; }
-    public decimal Latitude { get; set; }
-    public decimal Longitude { get; set; }
-    [Required]
     public int Capacity { get; set; }
     public decimal Demurrage { get; set; }
     public DateTime CreateDate { get; set; }
     public DateTime LastUpdate { get; set; }
 }
+
+
+

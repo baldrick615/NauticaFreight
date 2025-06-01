@@ -17,6 +17,7 @@ public class ApplicationDbContext : DbContext
     public DbSet<PortSchedule> PortSchedules { get; set; }
     public DbSet<Vessel> Vessels { get; set; }
     public DbSet<Trip> Trips { get; set; }
+    
 
     /*
     public DbSet<Invoice> Invoices { get; set; }

@@ -7,19 +7,18 @@ namespace NauticaFreight.API.Ports
 {
     [ApiController]
     [Route("api/[controller]")]
-    public class PortController : ControllerBase
+    public class PortsController : ControllerBase
     {
         private readonly IMapper _mapper;
         private readonly IPortRepository _portRepo;
 
-        public PortController(IMapper mapper, IPortRepository portRepo)
+        public PortsController(IMapper mapper, IPortRepository portRepo)
         {
             _mapper = mapper;
             _portRepo = portRepo;
         }
 
         [HttpGet]
-        [Route("GetPorts")]
         public async Task<ActionResult<Port>> GetPorts()
         {
             var ports = await _portRepo.GetPorts();
@@ -27,7 +26,7 @@ namespace NauticaFreight.API.Ports
         }
 
         [HttpGet]
-        [Route("GetPortById/{id}")]
+        [Route("{id:int}")]
         public async Task<ActionResult<Port>> GetPortById(int id)
         {
             var port = await _portRepo.GetPortById(id);
@@ -52,7 +51,7 @@ namespace NauticaFreight.API.Ports
 
 
         [HttpPut]
-        [Route("UpdatePort/{id}")]
+        [Route("{id:int}")]
         public async Task<ActionResult<Port>> UpdatePort([FromRoute] int id, [FromBody] UpdatePortDto updatePortDto)
         {
             var portToUpdate = _mapper.Map<Port>(updatePortDto);
@@ -67,7 +66,7 @@ namespace NauticaFreight.API.Ports
 
 
         [HttpDelete]
-        [Route("DeletePort/{id}")]
+        [Route("{id:int}")]
         public async Task<ActionResult<Port>> DeletePort([FromRoute] int id)
         {
             var portToDelete = await _portRepo.DeleteAsync(id);

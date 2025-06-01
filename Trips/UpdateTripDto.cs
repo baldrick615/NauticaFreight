@@ -35,6 +35,7 @@ namespace NauticaFreight.API.Trips
         public int CargoWeight { get; set; }
 
         public DateTime LastUpdate { get; set; }
+        public TripStatus Status { get; set; }
 
         //Navigation property for Vessel
         [ForeignKey(nameof(VesselId))]

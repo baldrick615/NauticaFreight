@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using NauticaFreight.API.Data;
 
@@ -11,9 +12,11 @@ using NauticaFreight.API.Data;
 namespace NauticaFreight.API.Migrations
 {
     [DbContext(typeof(ApplicationDbContext))]
-    partial class ApplicationDbContextModelSnapshot : ModelSnapshot
+    [Migration("20250531212013_remove trip status")]
+    partial class removetripstatus
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        /// <inheritdoc />
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -183,9 +186,8 @@ namespace NauticaFreight.API.Migrations
                     b.Property<DateTime>("LastUpdate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("StatusId")
+                        .HasColumnType("int");
 
                     b.Property<Guid>("VesselId")
                         .HasColumnType("uniqueidentifier");
@@ -196,9 +198,32 @@ namespace NauticaFreight.API.Migrations
 
                     b.HasIndex("DeparturePortId");
 
+                    b.HasIndex("StatusId");
+
                     b.HasIndex("VesselId");
 
                     b.ToTable("Trips");
+                });
+
+            modelBuilder.Entity("NauticaFreight.API.Trips.TripStatus", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"));
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("TripStatus");
                 });
 
             modelBuilder.Entity("NauticaFreight.API.Vessels.Vessel", b =>
@@ -255,6 +280,12 @@ namespace NauticaFreight.API.Migrations
                         .OnDelete(DeleteBehavior.Cascade)
                         .IsRequired();
 
+                    b.HasOne("NauticaFreight.API.Trips.TripStatus", "Status")
+                        .WithMany()
+                        .HasForeignKey("StatusId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
                     b.HasOne("NauticaFreight.API.Vessels.Vessel", "Vessel")
                         .WithMany()
                         .HasForeignKey("VesselId")
@@ -264,6 +295,8 @@ namespace NauticaFreight.API.Migrations
                     b.Navigation("ArrivalPort");
 
                     b.Navigation("DeparturePort");
+
+                    b.Navigation("Status");
 
                     b.Navigation("Vessel");
                 });

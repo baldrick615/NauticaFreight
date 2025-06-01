@@ -24,22 +24,35 @@ namespace NauticaFreight.API.Trips
         [Required]
         [DataType(DataType.Date)]
         public DateTime EstArrivalDate { get; set; }
-        
+
         [DataType(DataType.Date)]
         public DateTime ActualArrivalDate { get; set; }
-        
-        public int ArrivalPortId { get; set; }        
+
+        public int ArrivalPortId { get; set; }
         [ForeignKey(nameof(ArrivalPortId))]
         public Port ArrivalPort { get; set; }
 
         public string? CargoType { get; set; }
         public int CargoWeight { get; set; }
-        
+        public string Status { get; set; } = TripStatus.New.ToString();
+
         public DateTime CreateDate { get; set; }
         public DateTime LastUpdate { get; set; }
 
         //Navigation property for Vessel
         [ForeignKey(nameof(VesselId))]
         public Vessel Vessel { get; set; }
+    }
+
+    public enum TripStatus
+    {
+        New = 1,
+        Loading = 2,
+        Unloading = 3,
+        AwaitingCargo = 4,
+        InProgress = 5,
+        Completed = 6,
+        Delayed = 7,
+        Cancelled = 8
     }
 }

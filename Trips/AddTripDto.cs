@@ -18,19 +18,10 @@ namespace NauticaFreight.API.Trips
         
         [Required]
         [DataType(DataType.Date)]
-        public DateTime EstArrivalDate { get; set; }
-        
-        [DataType(DataType.Date)]
-        public DateTime ActualArrivalDate { get; set; }
-        
-        public int ArrivalPortId { get; set; }
-        
+        public DateTime EstArrivalDate { get; set; }        
+        public int ArrivalPortId { get; set; }        
         public string? CargoType { get; set; }
         public int CargoWeight { get; set; }
-        
-        public DateTime CreateDate { get; set; }
-        public DateTime LastUpdate { get; set; }
-
         
     }
 }

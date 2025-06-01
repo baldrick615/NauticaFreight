@@ -1,6 +1,7 @@
 @HostAddress = http://localhost:5141/
 @CustomerApi = api/Customer
-@PortsApi = api/Port
+@PortsApi = api/Ports
+@TripsApi = api/Trips
 @VesselsApi = api/Vessels
 @PortsScheduleApi = api/PortSchedule
 @Vesselid = 6234b17e-eb0e-4a3d-b050-08dd85af8d27
@@ -56,11 +57,11 @@ DELETE {{HostAddress}}{{CustomerApi}}/DeleteCustomer/11
 Content-Type: application/json
 
 ### GET ALL PORTS
-GET {{HostAddress}}{{PortsApi}}/GetPorts
+GET {{HostAddress}}{{PortsApi}}
 Accept: application/json
 
 ### Get Port By Id
-GET {{HostAddress}}{{PortsApi}}/GetPortById/11
+GET {{HostAddress}}{{PortsApi}}/13
 Accept: application/json
 
 ###
@@ -76,27 +77,27 @@ Content-Type: application/json
 }
 
 ### UPDATE PORT
-PUT {{HostAddress}}{{PortsApi}}/UpdatePort/11
+PUT {{HostAddress}}{{PortsApi}}/13
 Content-Type: application/json
 
 {
-  "portName": "Port of Test3",
-  "locationCity": "San Fransisco",
-  "locationCountry": "CN",
-  "capacity": 2000000,
-  "demurrage": 425.00,
-  "createDate": "2025-01-01T11:00:00",
-  "lastUpdate": "2025-03-18T17:36:05.004582"
+   "portName": "Port of Seattle",
+    "locationCity": "Seattle",
+    "locationCountry": "USA",
+    "latitude": 47.54212,
+    "longitude": -122.63943,
+    "capacity": 2777777,
+    "demurrage": 924.11
 }
 
 ### DELETE Port
-DELETE {{HostAddress}}{{PortsApi}}/DeletePort/12
+DELETE {{HostAddress}}{{PortsApi}}/10
 Content-Type: application/json
 
 ###
 
 GET {{HostAddress}}{{VesselsApi}}/GetVessels
-Content-Type: application/json
+Accept: application/json
 
 ###
 
@@ -133,20 +134,86 @@ DELETE {{HostAddress}}{{VesselsApi}}/{{Vesselid}}
 Content-Type: application/json
 
 ###
-GET {{HostAddress}}/api/Trips
+GET {{HostAddress}}{{TripsApi}}
 Accept: application/json
 
 ###
-POST {{HostAddress}}/api/Trips
+POST {{HostAddress}}{{TripsApi}}
 Content-Type: application/json
 
 {
-  "vesselId": "6234b17e-eb0e-4a3d-b050-08dd85af8d27",
-  "departurePortId": 1,
-  "arrivalPortId": 5,
-  "departureDate": "2025-03-01T00:00:00",
-  "estArrivalDate": "2025-03-10T00:00:00",
-  "actualArrivalDate": "2025-03-10T00:00:00",
-  "cargoType": "Electronics",
-  "cargoWeight": 10000
+  "vesselId": "3d42de49-9be8-46e8-cb07-08dd854b5ce5",
+  "departurePortId": 13,
+  "arrivalPortId": 11,
+  "departureDate": "2025-03-22T00:00:00",
+  "estArrivalDate": "2025-03-28T00:00:00",
+  "cargoType": "Dry Goods",
+  "cargoWeight": 75000
 }
+
+###
+GET {{HostAddress}}{{TripsApi}}/25fdfb10-1f3c-4bd9-1ab6-08dda08debf2
+Accept: application/json
+
+###
+PUT {{HostAddress}}{{TripsApi}}/25fdfb10-1f3c-4bd9-1ab6-08dda08debf2
+Content-Type: application/json
+
+{
+  "id": "25fdfb10-1f3c-4bd9-1ab6-08dda08debf2",
+  "vesselId": "3d42de49-9be8-46e8-cb07-08dd854b5ce5",
+  "departureDate": "2025-03-13T00:00:00",
+  "departurePortId": 2,
+  "departurePort": {
+    "portId": 2,
+    "portName": "Port of Miami",
+    "locationCity": "Miami",
+    "locationCountry": "USA",
+    "latitude": 25.77,
+    "longitude": -80.20,
+    "capacity": 2777777,
+    "demurrage": 924.11,
+    "createDate": "0001-01-01T00:00:00",
+    "lastUpdate": "2025-05-31T13:20:53.1523304"
+  },
+  "estArrivalDate": "2025-03-21T00:00:00",
+  "actualArrivalDate": "0001-01-01T00:00:00",
+  "arrivalPortId": 13,
+  "arrivalPort": {
+    "portId": 13,
+    "portName": "Port of Seattle",
+    "locationCity": "Seattle",
+    "locationCountry": "USA",
+    "latitude": 47.54,
+    "longitude": -122.64,
+    "capacity": 2777777,
+    "demurrage": 924.11,
+    "createDate": "0001-01-01T00:00:00",
+    "lastUpdate": "2025-05-31T13:23:58.0956792"
+  },
+  "cargoType": "Updated",
+  "cargoWeight": 87000,
+  "status": "Unloading",
+  "createDate": "2025-05-31T21:57:58.0942641",
+  "lastUpdate": "2025-05-31T21:57:58.0942643",
+  "vessel": {
+    "vesselId": "3d42de49-9be8-46e8-cb07-08dd854b5ce5",
+    "vesselName": "SeaKing",
+    "operator": "Maersk Ltd",
+    "countryOfOrigin": "Denmark",
+    "cargoCategory": "Tanker",
+    "carryingCapacity": 92000
+  }
+}
+
+###
+GET {{HostAddress}}{{TripsApi}}/limited-info/25fdfb10-1f3c-4bd9-1ab6-08dda08debf2
+Accept: application/json
+
+###
+
+GET {{HostAddress}}{{TripsApi}}/limited-info
+Accept: application/json
+
+###
+

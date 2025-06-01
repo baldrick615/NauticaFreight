@@ -57,6 +57,8 @@ namespace NauticaFreight.API.Ports
             existingPort.Demurrage = port.Demurrage;
             existingPort.CreateDate = port.CreateDate;
             existingPort.LastUpdate = DateTime.Now;
+            existingPort.Latitude = port.Latitude;
+            existingPort.Longitude = port.Longitude;
 
             await _db.SaveChangesAsync();
 
