@@ -27,8 +27,9 @@ namespace NauticaFreight.API.Mappings
 
             // Trip Mapping
             CreateMap<Trip, TripDto>().ReverseMap();
+            CreateMap<Trip, AddTripDto>().ReverseMap();
+            CreateMap<Trip, UpdateTripDto>().ReverseMap();
             CreateMap<TripDto, AddTripDto>().ReverseMap();
-            CreateMap<TripDto, UpdateTripDto>().ReverseMap();
 
         }
 
