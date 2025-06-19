@@ -30,7 +30,16 @@ builder.Services.AddScoped<IPortRepository, PortRepository>();
 
 builder.Services.AddDbContext<ApplicationDbContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
-
+//Add CORS policy allowing Angular
+builder.Services.AddCors(options =>
+{
+    options.AddPolicy("AllowAngular",
+        builder => builder
+            .WithOrigins("http://localhost:4200") 
+            .AllowAnyMethod()
+            .AllowAnyHeader()
+            .AllowCredentials());
+});
 
 
 var app = builder.Build();
@@ -40,6 +49,9 @@ if (app.Environment.IsDevelopment())
 {
     app.MapOpenApi();
 }
+
+app.UseCors("AllowAngular");
+app.UseWebSockets();
 
 //app.UseHttpsRedirection();
 app.UseRouting();
