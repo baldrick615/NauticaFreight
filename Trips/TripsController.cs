@@ -91,5 +91,24 @@ namespace NauticaFreight.API.Trips
             var trip = await _tripRepository.GetLimitedTripInfoAsync(id);
             return Ok(trip);
         }
+
+        /// <summary>
+        /// Allows for the retrieval of trips based on their status. TEST
+        /// </summary>
+        /// <param name="status"></param>
+        /// <returns></returns>
+        [HttpGet("status/{status}")]
+        public async Task<IActionResult> GetTripsByStatus([FromRoute] string status)
+        {
+            var trips = await _tripRepository.GetAllTripsAsync();
+            var filteredTrips = trips.Where(t => t.Status.Equals(status, StringComparison.OrdinalIgnoreCase)).ToList();
+            
+            if (!filteredTrips.Any())
+            {
+                return NotFound($"No trips found with status: {status}");
+            }
+            
+            return Ok(filteredTrips);
+        }
     }
 }
